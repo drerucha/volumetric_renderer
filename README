@@ -1,0 +1,7 @@
+Goal
+
+Implement a volumetric renderer. In the process, you will need to implement a voxel buffer to store your data. Volumetrics are a "cheat" on modeling/viewing large amounts of fine particulate matter which would be computationally infeasible if done in a brute-force manner. Examples of volumetrics are clouds and smoke, where actually modeling the water droplets or fine pieces of ash would be a huge burden.
+
+Bigger Picture
+
+Welcome to Computer Graphics. Regardless of your background, this assignment should be a fresh start to the year and unlike any assignments you may have had in the past. This assignment will teach you that neither OpenGL nor DirectX is necessary for graphics, as you will not use either one to complete the tasks we've laid out for you. You will store a large amount of data for this assignment, so your memory management skills may be tested. Be careful, since there are ways to make this assignment excruciatingly slow, such as not being smart about loop ordering. The assignment is actually fairly straightforward if you follow the course notes for the underlying equations, but will help dust off your programming skills if you took the summer off. The end result should be the ability to render some nice clouds.
