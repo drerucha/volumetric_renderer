@@ -1,16 +1,59 @@
 #pragma once
 
+// C++ includes.
 #include <iostream>
+#include <string>
+
+// 3rd party includes.
 #include "../glm/glm.hpp"
 //#include "../glm/gtc/matrix_transform.hpp"
 
+// My includes.
+#include "SceneData.h"
+
+
+////////////////////////////////////////////////////
+// Define constants.
+////////////////////////////////////////////////////
+
+const std::string CONFIG_FILE_PATH = "C:\\Users\\Danny\\Documents\\_projects\\code\\volumetric_renderer_fall_2014\\scene_data\\scene_01.txt";
+const std::string OUTPUT_DIR_PATH = "C:\\Users\\Danny\\Documents\\_projects\\code\\volumetric_renderer_fall_2014\\rendered_output";
+
+
+////////////////////////////////////////////////////
+// Define global variables.
+////////////////////////////////////////////////////
+
+SceneData *scene_data;
+
+
+////////////////////////////////////////////////////
+// Define method prototypes.
+////////////////////////////////////////////////////
+
+void cleanup( void );
+
+
+////////////////////////////////////////////////////
+// Program entry point.
+////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-	glm::vec3 light_pos( 0.0f, 2.0f, 10.0f );
+	scene_data = new SceneData( CONFIG_FILE_PATH );
 
-	std::cout << "Hello world." << std::endl;
-	printf( "( %.2f, %.2f, %.2f )", light_pos.x, light_pos.y, light_pos.z );
+	// TODO.
+
 	std::cin.ignore();
 
+	cleanup();
 	return 0;
+}
+
+
+////////////////////////////////////////////////////
+// Program-level destructor.
+////////////////////////////////////////////////////
+void cleanup()
+{
+	delete scene_data;
 }
