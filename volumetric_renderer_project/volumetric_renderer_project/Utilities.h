@@ -15,6 +15,8 @@ namespace Utilities
 	extern float stringToFloat( std::string s );
 	extern int stringToInt( std::string s );
 	extern bool stringIsPositiveInt( std::string s );
+
+	extern float degreesToRadians( float degrees );
 }
 
 #endif

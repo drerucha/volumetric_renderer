@@ -41,7 +41,8 @@ int main(int argc, char** argv)
 {
 	scene_data = new SceneData( CONFIG_FILE_PATH );
 
-	// TODO.
+	// TODO: Import some image library for output.
+	// TODO: Generate ray directions for each pixel, and test that the directions are correct.
 
 	std::cin.ignore();
 

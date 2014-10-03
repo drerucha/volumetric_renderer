@@ -5,6 +5,9 @@
 #include "Utilities.h"
 
 
+const float PI = 3.14159265359f;
+
+
 std::vector<std::string> Utilities::tokenizeString( const std::string &s,
 													const char &d )
 {
@@ -35,4 +38,9 @@ bool Utilities::stringIsPositiveInt( std::string s )
 		}
 	}
 	return true;
+}
+
+float Utilities::degreesToRadians( float degrees )
+{
+	return degrees * ( PI / 180.0f );
 }
