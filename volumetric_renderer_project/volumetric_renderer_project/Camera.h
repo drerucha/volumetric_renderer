@@ -3,7 +3,11 @@
 #ifndef _CAMERA
 #define _CAMERA
 
+// 3rd party includes.
 #include "../glm/glm.hpp"
+
+// My includes.
+#include "SceneStructs.h"
 
 
 class Camera
@@ -15,6 +19,11 @@ public:
 			glm::vec3 vdir,
 			glm::vec3 uvec );
 	~Camera( void );
+
+	Ray computeRayThroughPixel( const int x,
+								const int y );
+
+	glm::vec2 getResolution( void );
 
 private:
 	float fovy;

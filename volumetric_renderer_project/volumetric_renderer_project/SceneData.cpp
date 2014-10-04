@@ -8,17 +8,6 @@
 
 
 ////////////////////////////////////////////////////
-// Simple logic to control visibility of debug print statements.
-////////////////////////////////////////////////////
-
-#ifdef CONSOLE_OUTPUT
-#define DEBUG_MSG( str ) do { std::cout << str << std::endl; } while( false )
-#else
-#define DEBUG_MSG( str ) do { } while ( false )
-#endif
-
-
-////////////////////////////////////////////////////
 // Constructor + destructor.
 ////////////////////////////////////////////////////
 
@@ -39,6 +28,7 @@ SceneData::SceneData( std::string config_file_path )
 SceneData::~SceneData()
 {
 	delete[] voxel_densities;
+	delete cam;
 }
 
 
@@ -47,7 +37,7 @@ SceneData::~SceneData()
 ////////////////////////////////////////////////////
 void SceneData::parseConfigFile( std::string config_file_path )
 {
-	DEBUG_MSG( "parsing config file..." );
+	CONSOLE_MSG( "Parsing config file..." );
 
 	std::string line;
 	std::ifstream file( config_file_path );
@@ -75,9 +65,9 @@ void SceneData::parseConfigFile( std::string config_file_path )
 				step = Utilities::stringToFloat( v[1] );
 			}
 			else if ( v.front() == "XYZC" ) {
-				xyzc.x = Utilities::stringToInt( v[1] );
-				xyzc.y = Utilities::stringToInt( v[2] );
-				xyzc.z = Utilities::stringToInt( v[3] );
+				xyzc.x = Utilities::stringToFloat( v[1] );
+				xyzc.y = Utilities::stringToFloat( v[2] );
+				xyzc.z = Utilities::stringToFloat( v[3] );
 
 				// Allocate memory to store voxel density values.
 				voxel_densities = new float[( int )( xyzc.x * xyzc.y * xyzc.z )];
@@ -96,8 +86,8 @@ void SceneData::parseConfigFile( std::string config_file_path )
 				output_file_name = v[1];
 			}
 			else if ( v.front() == "RESO" ) {
-				reso.x = Utilities::stringToInt( v[1] );
-				reso.y = Utilities::stringToInt( v[2] );
+				reso.x = Utilities::stringToFloat( v[1] );
+				reso.y = Utilities::stringToFloat( v[2] );
 			}
 			else if ( v.front() == "EYEP" ) {
 				eyep.x = Utilities::stringToFloat( v[1] );
@@ -131,7 +121,7 @@ void SceneData::parseConfigFile( std::string config_file_path )
 			// Console output.
 			if ( num_lines_processed_since_last_output == NUM_LINES_PROCESSED_BETWEEN_CONSOLE_OUTPUT ) {
 				num_lines_processed_since_last_output = 0;
-				DEBUG_MSG( "Processed " << num_lines_processed << " lines." );
+				CONSOLE_MSG( "Processed " << num_lines_processed << " lines." );
 			}
 
 			++num_lines_processed;
@@ -141,9 +131,21 @@ void SceneData::parseConfigFile( std::string config_file_path )
 		file.close();
 	}
 	else {
-		DEBUG_MSG( "Unable to open file at " << config_file_path );
+		CONSOLE_MSG( "Unable to open file at " << config_file_path );
 	}
 
-	DEBUG_MSG( "Processed " << num_lines_processed << " lines." );
-	DEBUG_MSG( "Done parsing scene config file." );
+	CONSOLE_MSG( "Processed " << num_lines_processed << " lines." );
+	CONSOLE_MSG( "Done parsing scene config file." );
+}
+
+
+Camera * SceneData::getCamera()
+{
+	return cam;
+}
+
+
+std::string SceneData::getOutputFileName()
+{
+	return output_file_name;
 }

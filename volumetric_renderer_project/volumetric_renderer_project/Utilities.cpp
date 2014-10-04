@@ -32,7 +32,7 @@ int Utilities::stringToInt( std::string s )
 
 bool Utilities::stringIsPositiveInt( std::string s )
 {
-	for ( int i = 0; i < s.length(); ++i ) {
+	for ( unsigned int i = 0; i < s.length(); ++i ) {
 		if ( !isdigit( s[i] ) ) {
 			return false;
 		}
@@ -43,4 +43,22 @@ bool Utilities::stringIsPositiveInt( std::string s )
 float Utilities::degreesToRadians( float degrees )
 {
 	return degrees * ( PI / 180.0f );
+}
+
+glm::vec3 Utilities::clampVec3( const glm::vec3 &v, const float min, const float max )
+{
+	glm::vec3 n;
+	n.x = ( v.x > max ) ? max : ( ( v.x < min ) ? min : v.x );
+	n.y = ( v.y > max ) ? max : ( ( v.y < min ) ? min : v.y );
+	n.x = ( v.z > max ) ? max : ( ( v.z < min ) ? min : v.z );
+	return n;
+}
+
+glm::vec3 Utilities::absoluteValueOfVec3( const glm::vec3 &v )
+{
+	glm::vec3 n;
+	n.x = ( v.x < 0.0f ) ? ( v.x * -1.0f ) : v.x;
+	n.y = ( v.y < 0.0f ) ? ( v.y * -1.0f ) : v.y;
+	n.z = ( v.z < 0.0f ) ? ( v.z * -1.0f ) : v.z;
+	return n;
 }

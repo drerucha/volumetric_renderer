@@ -3,15 +3,15 @@
 #ifndef _SCENE_DATA
 #define _SCENE_DATA
 
+// C++ includes.
 #include <string>
 
+// 3rd party includes.
 #include "../glm/glm.hpp"
 
+// My includes.
 #include "Camera.h"
 
-
-// Uncomment this line to print debug statements to the console about parsing scene data.
-#define CONSOLE_OUTPUT
 
 const int NUM_LINES_PROCESSED_BETWEEN_CONSOLE_OUTPUT = 10000;
 
@@ -25,6 +25,9 @@ public:
 
 	SceneData( std::string config_file_path );
 	~SceneData( void );
+
+	Camera * getCamera( void );
+	std::string getOutputFileName( void );
 
 private:
 	////////////////////////////////////////////////////
@@ -54,8 +57,6 @@ private:
 	float *voxel_densities;
 
 	Camera *cam;
-
-	// TODO: SceneData should have VoxelBuffer and Camera members.
 };
 
 #endif
